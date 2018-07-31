@@ -1,0 +1,58 @@
+* {
+  font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  overflow-y: hidden;
+  background: rgba(106, 190, 91, 0.335);
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#sprint_panel {
+  padding: 24px;
+  width: 700px;
+}
+
+#sprint_list {
+  list-style: none;
+}
+
+#sprint_list > li {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.time-left {
+  font-size: 2rem;
+  height: 60px;
+  line-height: 60px;
+}
+
+.project-title {
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+.sprint-info {
+  display: flex;
+  margin-right: 16px;
+  min-width: 300px;
+  flex-flow: column;
+  justify-content: space-around;
+  text-align: right;
+}
+
+.sprint-code-name {
+  font-size: 1.1rem;
+}

@@ -19,7 +19,9 @@ body {
 
 #sprint_panel {
   padding: 24px;
-  width: 700px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 #sprint_list {
@@ -47,7 +49,6 @@ body {
 .sprint-info {
   display: flex;
   margin-right: 16px;
-  min-width: 300px;
   flex-flow: column;
   justify-content: space-around;
   text-align: right;

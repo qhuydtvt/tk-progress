@@ -38,16 +38,17 @@ const getAllSprints = async () => {
 function updateTimeLeft(sprint) {
   setTimeout(() => {
     const totalSecondsLeft =  new Date(sprint.deadline.seconds) - Date.now() / 1000;
-    let timeLeftString = "";
     if (totalSecondsLeft > 0) {
       const s = Math.floor(totalSecondsLeft % 60);
       const m = Math.floor((totalSecondsLeft / 60) % 60);
       const h = Math.floor((totalSecondsLeft / 60 / 60) % 24);
       const d = Math.floor(totalSecondsLeft / 60 / 60 / 24);
-      timeLeftString = `${d}d:${h}h:${m}m:${s}s`;
+      $(`#${sprint.id} .time-left`).attr('class', 'time-left');
+      $(`#${sprint.id} .time-left`).text(`${d}d:${h}h:${m}m:${s}s`);
+    } else {
+      $(`#${sprint.id} .time-left`).attr('class', 'time-left red');  
+      $(`#${sprint.id} .time-left`).text("0d:0h:0m:0s");
     }
-    console.log(timeLeftString);
-    $(`#${sprint.id} .time-left`).text(timeLeftString);
     updateTimeLeft(sprint);
   }, 1000);
 }

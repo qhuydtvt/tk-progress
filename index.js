@@ -35,26 +35,31 @@ const getAllSprints = async () => {
   return await Promise.all(populateProjects);
 }
 
-function updateTimeLeft(sprint) {
+function repeatUpdateTimeLeft(sprint) {
+  updateTimeLeft(sprint);
   setTimeout(() => {
-    const totalSecondsLeft =  new Date(sprint.deadline.seconds) - Date.now() / 1000;
-    if (totalSecondsLeft > 0) {
-      const s = Math.floor(totalSecondsLeft % 60);
-      const m = Math.floor((totalSecondsLeft / 60) % 60);
-      const h = Math.floor((totalSecondsLeft / 60 / 60) % 24);
-      const d = Math.floor(totalSecondsLeft / 60 / 60 / 24);
-      $(`#${sprint.id} .time-left`).attr('class', 'time-left');
-      $(`#${sprint.id} .time-left`).text(`${d}d:${h}h:${m}m:${s}s`);
-    } else {
-      $(`#${sprint.id} .time-left`).attr('class', 'time-left red');  
-      $(`#${sprint.id} .time-left`).text("0d:0h:0m:0s");
-    }
-    updateTimeLeft(sprint);
+    repeatUpdateTimeLeft(sprint);
   }, 1000);
+}
+
+function updateTimeLeft(sprint) {
+  const totalSecondsLeft =  new Date(sprint.deadline.seconds) - Date.now() / 1000;
+  if (totalSecondsLeft > 0) {
+    const s = Math.floor(totalSecondsLeft % 60);
+    const m = Math.floor((totalSecondsLeft / 60) % 60);
+    const h = Math.floor((totalSecondsLeft / 60 / 60) % 24);
+    const d = Math.floor(totalSecondsLeft / 60 / 60 / 24);
+    $(`#${sprint.id} .time-left`).attr('class', 'time-left');
+    $(`#${sprint.id} .time-left`).text(`${d}d:${h}h:${m}m:${s}s`);
+  } else {
+    $(`#${sprint.id} .time-left`).attr('class', 'time-left red');  
+    $(`#${sprint.id} .time-left`).text("0d:0h:0m:0s");
+  }
 }
 
 async function showSprints() {
   const sprints = await getAllSprints();
+  $("#loading").addClass('hidden');
   sprints.forEach(sprint => {
     $(` <li id='${sprint.id}'>
           <div class="sprint-info">
@@ -64,7 +69,7 @@ async function showSprints() {
           <div class="time-left"></div>
         </li>`
     ).appendTo("#sprint_list");
-    updateTimeLeft(sprint);
+    repeatUpdateTimeLeft(sprint);
   });
 }
 

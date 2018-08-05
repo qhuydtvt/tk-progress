@@ -49,7 +49,14 @@ function updateTimeLeft(sprint) {
     const m = Math.floor((totalSecondsLeft / 60) % 60);
     const h = Math.floor((totalSecondsLeft / 60 / 60) % 24);
     const d = Math.floor(totalSecondsLeft / 60 / 60 / 24);
-    $(`#${sprint.id} .time-left`).attr('class', 'time-left');
+    let textColor = 'green';
+    if (d < 1) {
+      textColor = 'red';
+    }
+    else if (d < 3) {
+      textColor = 'orange';
+    }
+    $(`#${sprint.id} .time-left`).attr('class', `time-left ${textColor}`);
     $(`#${sprint.id} .time-left`).text(`${d}d:${h}h:${m}m:${s}s`);
   } else {
     $(`#${sprint.id} .time-left`).attr('class', 'time-left red');  

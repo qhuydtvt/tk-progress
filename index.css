@@ -52,6 +52,7 @@ body {
   font-size: 2rem;
   height: 60px;
   line-height: 60px;
+  font-weight: bold;
 }
 
 .project-title {
@@ -72,5 +73,13 @@ body {
 }
 
 .red {
-  color: red;
+  color: #e70505;
+}
+
+.green {
+  color: #21c705;
+}
+
+.orange {
+  color: #e49502;
 }
